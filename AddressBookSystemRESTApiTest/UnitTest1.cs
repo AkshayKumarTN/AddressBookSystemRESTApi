@@ -1,25 +1,26 @@
-﻿using RestSharp;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using AddressBookSystemRESTApi;
 using Newtonsoft.Json;
-using System;
+using RestSharp;
 using System.Collections.Generic;
 
-namespace AddressBookSystemRESTApi
+namespace AddressBookSystemRESTApiTest
 {
-    class Program
+    [TestClass]
+    public class UnitTest1
     {
-        static void Main(string[] args)
+        [TestMethod]
+        public void OnCallingGET_ReturnEmployeeList()
         {
-            Console.WriteLine("\n Address Book System REST Api");
-            Console.WriteLine("**********************************************************************************");
-
             // Creating Object of EmployeeWebService to Run Fuctions on them...............
             AddressBookSystemWebService service = new AddressBookSystemWebService();
             // Calling GetEmployeeList which will return IRestResponse...............
-            service.GetEmployeeList();
             IRestResponse response = service.GetEmployeeList();
+            // HttpStatusCode.OK = 200................
+            Assert.AreEqual(response.StatusCode, System.Net.HttpStatusCode.OK);
             // Deserialize JSON Object ..............
             List<Contact> dataResponse = JsonConvert.DeserializeObject<List<Contact>>(response.Content);
-            Console.WriteLine("Count of Contacts :" +dataResponse.Count);
+            Assert.AreEqual(2, dataResponse.Count);
         }
     }
 }
