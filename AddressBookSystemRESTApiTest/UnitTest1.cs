@@ -83,5 +83,16 @@ namespace AddressBookSystemRESTApiTest
             var res = JsonConvert.DeserializeObject<Contact>(response.Content);
             Assert.AreEqual(System.Net.HttpStatusCode.OK, response.StatusCode);
         }
+
+        [TestMethod]
+        public void OnCallingDeleteAPI_DeleteContactDetails()
+        {
+            AddressBookSystemWebService service = new AddressBookSystemWebService();
+            IRestResponse response1 = service.DeleteContact();
+            IRestResponse response = service.GetContctList();
+            List<Contact> result = JsonConvert.DeserializeObject<List<Contact>>(response.Content);
+            Assert.AreEqual(3, result.Count);
+            Assert.AreEqual(System.Net.HttpStatusCode.OK, response.StatusCode);
+        }
     }
 }

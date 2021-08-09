@@ -73,5 +73,14 @@ namespace AddressBookSystemRESTApi
             IRestResponse response = client.Execute(request);
             return response;
         }
+
+        public IRestResponse DeleteContact()
+        {
+            // Creating RestRequest Object with Method.POST...............
+            RestRequest request = new RestRequest("/AddressBook/4", Method.DELETE);
+            // Executing request...........
+            IRestResponse response = client.Execute(request);
+            return response;
+        }
     }
 }
