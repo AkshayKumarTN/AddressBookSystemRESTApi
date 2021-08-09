@@ -62,5 +62,26 @@ namespace AddressBookSystemRESTApiTest
             Assert.AreEqual(4, dataResponse.Count);
 
         }
+
+        [TestMethod]
+        public void OnCallingPutAPI_UpdateContactDetails()
+        {
+            AddressBookSystemWebService service = new AddressBookSystemWebService();
+            // Employee object is created.............
+            Contact contact = new Contact();
+            // Adding Values in the Object...................
+            contact.firstName = "Guru";
+            contact.lastName = "V";
+            contact.address = "Arakkonam";
+            contact.city = "Arakkonam";
+            contact.state = "TN";
+            contact.zipCode = 631002;
+            contact.phoneNumber = 678901234;
+            contact.email = "Guru123@gmail.com";
+            IRestResponse response = service.UpdateContact(contact);
+            // Convert the jsonobject to employee object............
+            var res = JsonConvert.DeserializeObject<Contact>(response.Content);
+            Assert.AreEqual(System.Net.HttpStatusCode.OK, response.StatusCode);
+        }
     }
 }

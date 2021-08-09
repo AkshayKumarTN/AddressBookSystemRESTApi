@@ -52,5 +52,26 @@ namespace AddressBookSystemRESTApi
                 service.AddContact(contact);
             }
         }
+
+        public IRestResponse UpdateContact(Contact contact)
+        {
+            // Creating RestRequest Object with Method.POST...............
+            RestRequest request = new RestRequest("/AddressBook/3", Method.PUT);
+            // Creating JsonObject Object to insert values................
+            JsonObject json = new JsonObject();
+            json.Add("FirstName", contact.firstName);
+            json.Add("LastName", contact.lastName);
+            json.Add("Address", contact.address);
+            json.Add("City", contact.city);
+            json.Add("State", contact.state);
+            json.Add("Zip", contact.zipCode);
+            json.Add("PhoneNumber", contact.phoneNumber);
+            json.Add("Email", contact.email);
+            // Adding into JSON file..............
+            request.AddParameter("application/json", json, ParameterType.RequestBody);
+            // Executing request...........
+            IRestResponse response = client.Execute(request);
+            return response;
+        }
     }
 }
