@@ -67,7 +67,7 @@ namespace AddressBookSystemRESTApiTest
         public void OnCallingPutAPI_UpdateContactDetails()
         {
             AddressBookSystemWebService service = new AddressBookSystemWebService();
-            // Employee object is created.............
+            // Contact object is created.............
             Contact contact = new Contact();
             // Adding Values in the Object...................
             contact.firstName = "Guru";
@@ -79,7 +79,7 @@ namespace AddressBookSystemRESTApiTest
             contact.phoneNumber = 678901234;
             contact.email = "Guru123@gmail.com";
             IRestResponse response = service.UpdateContact(contact);
-            // Convert the jsonobject to employee object............
+            // Convert the jsonobject to Contact object............
             var res = JsonConvert.DeserializeObject<Contact>(response.Content);
             Assert.AreEqual(System.Net.HttpStatusCode.OK, response.StatusCode);
         }
